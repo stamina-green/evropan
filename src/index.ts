@@ -36,6 +36,7 @@ const main = async () => {
   await page.waitForTimeout(1500);
   let icko = 10;
   let i = 0;
+  let out
   for (i = 0; i < icko; i++) {
     console.log("i", i);
     if(i === 1) {
@@ -45,8 +46,8 @@ const main = async () => {
       });
     }
     try {
-      const out = await runCaptcha(page);
-      if (out === "err") break;
+      out = await runCaptcha(page);
+      if (out === "err" || out === "ere") break;
     } catch (e) {
       console.log("err runCaptcha", e);
       icko++;
@@ -67,7 +68,7 @@ const main = async () => {
   }
   if(i >= 9) {
     ees.emit("num");
-  } else { 
+  } else if(out === "err"){ 
     const a =   setTimeout(async () => {
       return process.exit(0)
     }, 90000);
@@ -127,7 +128,13 @@ const runCaptcha = async (page: Page): Promise<string> => {
   console.log(button);
 
   const inner = await button?.evaluate((el: any) => el.innerText);
+  
   if (inner !== "Hlasuj") {
+    const iframe = await page.waitForSelector(
+      'iframe[sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox allow-storage-access-by-user-activation"][style="width: 400px; height: 580px;"]',
+      { timeout: 3000 }
+    );
+    if(iframe) return "ere"
     return "err";
   }
   await button?.click();
