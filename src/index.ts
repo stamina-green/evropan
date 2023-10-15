@@ -2,7 +2,7 @@ import puppeteer, { Page } from "puppeteer";
 import websocket from "websocket";
 import EventEmitter from "events";
 import * as fs from "fs";
-// import { exec } from "child_process";
+import { exec } from "child_process";
 
 const WebSocketClient = websocket.client;
 const ees = new EventEmitter();
@@ -16,7 +16,15 @@ const main = async () => {
   totalTries++;
   const browser = await puppeteer.launch({ headless: false, defaultViewport: {height: 1080, width: 920}, args });
   const page = await browser.newPage();
-  await page.goto("https://www.evropa2.cz/souteze/maturitak-evropy-2-3");
+  try {
+    await page.goto("https://www.evropa2.cz/souteze/maturitak-evropy-2-3");
+  } catch (error) {
+    if(process.platform === "linux") {
+      await exec('nordvpn disconnect && nordvpn connect Dedicated_IP', async (e, out, err) => {
+        console.log(e, out, err);
+      })
+  }
+  }
   const cooButt = await page.waitForSelector("#didomi-notice-agree-button");
   cooButt?.click();
   await page.waitForTimeout(1500);
