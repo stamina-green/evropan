@@ -68,7 +68,7 @@ const main = async () => {
   if(i >= 9) {
     ees.emit("num");
   } else { 
-    connectVPN()
+    await connectVPN()
     console.log("reboot inc a");
     
   }
