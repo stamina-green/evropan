@@ -70,7 +70,10 @@ const main = async () => {
   } else { 
     await connectVPN()
     console.log("reboot inc a");
-    
+    setTimeout(async () => {
+      return await browser.close();
+
+    }, 30000);
   }
   
   await page.screenshot({ path: "./scr/out" + Date.now() + ".png" });
@@ -84,6 +87,7 @@ const connectVPN = async (): Promise<void> => {
       if(!err && !e) {
         await new Promise((r) => setTimeout(r, 10000))
         connect()
+        console.log("reboot inc b");
         return resolve()
       }
       return await connectVPN()
