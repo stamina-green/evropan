@@ -70,7 +70,7 @@ const main = async () => {
   } else { 
     const a =   setTimeout(async () => {
       return process.exit(0)
-    }, 30000);
+    }, 90000);
     await connectVPN()
     console.log("reboot inc a");
     clearTimeout(a)
