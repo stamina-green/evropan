@@ -13,9 +13,15 @@ const args: string[] = []
 if(process.platform === "linux") args.push("--no-sandbox", "--window-size=920,1080")
 
 const main = async () => {
+  const start = Date.now();
   totalTries++;
   const browser = await puppeteer.launch({ headless: false, defaultViewport: {height: 1080, width: 920}, args });
   const page = await browser.newPage();
+  page.on("error", async (e) => {
+    if(Date.now() - start < 1000) {
+      process.exit(203)
+  };
+});
   try {
     await page.goto("https://www.evropa2.cz/souteze/maturitak-evropy-2-3");
   } catch (error) {
@@ -71,7 +77,7 @@ const main = async () => {
   await browser.close();
 };
 const connectVPN = async (): Promise<void> => {
-  return new Promise(async (resolve, reject) => {
+  return new Promise(async (resolve) => {
   if(process.platform === "linux") {
     await exec('nordvpn disconnect && nordvpn connect Dedicated_IP', async (e, out, err) => {
       console.log(e, out, err);
