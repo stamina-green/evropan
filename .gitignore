@@ -1,0 +1,8 @@
+*
+!/src*
+!/src/**/*
+!package.json
+!package.lock.json
+!maker.ts
+!run.sh
+!.gitignore
