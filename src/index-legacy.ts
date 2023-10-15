@@ -108,7 +108,7 @@ const getTextFromMP3Link = async (link: string): Promise<string> => {
 
 const runCaptcha = async (page: Page): Promise<string> => {
   const a = await page.waitForSelector(
-    'div[title="8.M – Gymnázium Christiana Dopplera"]'
+    'div[title="4. B – Smíchovská střední průmyslová škola a gymnázium"]'
   );
   if (!a) throw new Error("a not found");
   const button = await (
@@ -193,9 +193,9 @@ client.on("connect", function (connection) {
     connection.send(data);
   });
   ees.on("num", async () => {
-    console.log("sun");
+    console.log("num");
 
-    connection.send("sun");
+    connection.send("num");
   });
   connection.on("message", async function (message) {
     if (message.type === "utf8") {
