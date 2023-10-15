@@ -130,9 +130,8 @@ const runCaptcha = async (page: Page): Promise<string> => {
   const inner = await button?.evaluate((el: any) => el.innerText);
   
   if (inner !== "Hlasuj") {
-    const iframe = await page.waitForSelector(
-      'iframe[sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox allow-storage-access-by-user-activation"][style="width: 400px; height: 580px;"]',
-      { timeout: 3000 }
+    const iframe = await page.$(
+      'iframe[sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox allow-storage-access-by-user-activation"][style="width: 400px; height: 580px;"]'
     );
     if(iframe) return "ere"
     return "err";
