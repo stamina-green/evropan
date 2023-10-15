@@ -18,7 +18,7 @@ const main = async () => {
   const browser = await puppeteer.launch({ headless: false, defaultViewport: {height: 1080, width: 920}, args });
   const page = await browser.newPage();
   page.on("error", async (e) => {
-    if(Date.now() - start < 1000) {
+    if(Date.now() - start < 3000) {
       process.exit(203)
   };
 });
@@ -68,7 +68,7 @@ const main = async () => {
   if(i >= 9) {
     ees.emit("num");
   } else { 
-    connectVPN()
+    await connectVPN()
     console.log("reboot inc a");
     
   }
