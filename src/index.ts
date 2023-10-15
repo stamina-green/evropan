@@ -68,13 +68,14 @@ const main = async () => {
   if(i >= 9) {
     ees.emit("num");
   } else { 
+    const a =   setTimeout(async () => {
+      return process.exit(0)
+    }, 30000);
     await connectVPN()
     console.log("reboot inc a");
-    setTimeout(async () => {
-      return await browser.close();
-
-    }, 30000);
-  }
+    clearTimeout(a)
+}
+  
   
   await page.screenshot({ path: "./scr/out" + Date.now() + ".png" });
   await browser.close();
