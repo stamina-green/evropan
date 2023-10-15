@@ -62,10 +62,7 @@ const main = async () => {
   if(i >= 9) {
     ees.emit("num");
   } else { 
-    // exec('cd "C:\\Program Files\\NordVPN\\" && .\\NordVPN.exe -c', (e, out, err) => {
-    //   console.log(e, out, err);
-    // })
-    // await page.waitForTimeout(5000);
+    connectVPN()
     console.log("reboot inc a");
     
   }
@@ -73,7 +70,21 @@ const main = async () => {
   await page.screenshot({ path: "./scr/out" + Date.now() + ".png" });
   await browser.close();
 };
-
+const connectVPN = async (): Promise<void> => {
+  return new Promise(async (resolve, reject) => {
+  if(process.platform === "linux") {
+    await exec('nordvpn disconnect && nordvpn connect Dedicated_IP', async (e, out, err) => {
+      console.log(e, out, err);
+      if(!err) {
+        await new Promise((r) => setTimeout(r, 10000))
+        connect()
+        return resolve()
+      }
+      return await connectVPN()
+    })
+  } else resolve()
+})
+}
 const getTextFromMP3Link = async (link: string): Promise<string> => {
   ees.emit("new", link);
   console.log("emited");
