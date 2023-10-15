@@ -1,1 +1,0 @@
-CMakeLists.txt not found in /home/cihalvi/src/evropan/src/whisper.cpp Select CMakeLists.txt
