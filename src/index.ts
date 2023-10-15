@@ -8,9 +8,12 @@ const ees = new EventEmitter();
 
 let totalTries = 0;
 
+const args: string[] = []
+if(process.platform === "linux") args.push("--no-sandbox")
+
 const main = async () => {
   totalTries++;
-  const browser = await puppeteer.launch({ headless: false });
+  const browser = await puppeteer.launch({ headless: false, defaultViewport: {height: 1280, width: 720}, args });
   const page = await browser.newPage();
   await page.goto("https://www.evropa2.cz/souteze/maturitak-evropy-2-3");
   const cooButt = await page.waitForSelector("#didomi-notice-agree-button");
@@ -20,7 +23,11 @@ const main = async () => {
   let i = 0;
   for (i = 0; i < icko; i++) {
     console.log("i", i);
-
+    if(i === 1) {
+      await page.evaluate(() => {
+        window.scrollBy(0, 100)
+      });
+    }
     try {
       const out = await runCaptcha(page);
       if (out === "err") break;
@@ -92,6 +99,7 @@ const runCaptcha = async (page: Page): Promise<string> => {
     return "err";
   }
   await button?.click();
+  
   const iframe = await page.waitForSelector(
     'iframe[sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox allow-storage-access-by-user-activation"][style="width: 400px; height: 580px;"]',
     { timeout: 3000 }

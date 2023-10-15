@@ -52,9 +52,15 @@ const getFilefromLink = async (link: string): Promise<string> => {
       file.on("finish", async () => {
         file.close();
         console.log("file downloaded");
+        let out
+        try {
+        out = handle.processFile("./file.mp3");
+        } catch (e) {
+          console.log("error processing file");
+          
+        out = {transcript: "a"}
+        }
 
-        const out = handle.processFile("./file.mp3");
-        // const out = {transcript: "test"}
         return resolve(out.transcript);
       });
       file.on("error", (err) => {
