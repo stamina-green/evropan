@@ -1,0 +1,23 @@
+{
+  "name": "evrope",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "@picovoice/leopard-node": "^1.2.0",
+    "@types/node": "^20.8.4",
+    "@types/websocket": "^1.0.7",
+    "axios": "^1.5.1",
+    "puppeteer": "^21.3.8",
+    "typescript": "^5.2.2",
+    "websocket": "^1.0.34"
+  },
+  "babel":  {
+    
+      "presets": ["@babel/preset-env", "@babel/env", "@babel/react","@babel/preset-flow"]
+    
+  }
+}
