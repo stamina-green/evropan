@@ -19,7 +19,7 @@ const main = async () => {
   const page = await browser.newPage();
   page.on("error", async (e) => {
     if(Date.now() - start < 3000) {
-      process.exit(203)
+      process.exit(1)
   };
 });
   try {
