@@ -1,7 +1,7 @@
 git pull;
-if [ $1 = "vpn" ]; then
+npm i;
+if [ $1 -eq "vpn" ]; then
   nordvpn connect Dedicated_IP;
 fi
-sudo su;
 x=1;
-while [ $x -le 7 ]; do ts-node src/index.ts; done;
+while [ $x -le 7 ]; do sudo ts-node src/index.ts; done;
