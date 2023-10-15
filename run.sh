@@ -1,6 +1,6 @@
 git pull;
 npm i;
-if [ $1 -eq "vpn" ]; then
+if [ $1 = "vpn" ]; then
   nordvpn connect Dedicated_IP;
 fi
 x=1;
