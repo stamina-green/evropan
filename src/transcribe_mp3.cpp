@@ -63,7 +63,7 @@ int main(int argc, char** argv) {
     std::string mp3FilePath = argv[1];
     std::string transcription = convertAndTranscribe(mp3FilePath);
 	transcription = processTranscriptionOutput(transcription);
-    std::cout << transcription << std::endl;
+    std::cout << std::string(transcription.begin()+1, transcription.end()) << std::endl;
 
     return 0;
 }
