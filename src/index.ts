@@ -79,7 +79,7 @@ const main = async () => {
 const connectVPN = async (): Promise<void> => {
   return new Promise(async (resolve) => {
   if(process.platform === "linux") {
-    await exec('nordvpn disconnect && nordvpn connect Dedicated_IP', async (e, out, err) => {
+    await exec('nordvpn connect Dedicated_IP', async (e, out, err) => {
       console.log(e, out, err);
       if(!err && !e) {
         await new Promise((r) => setTimeout(r, 10000))
