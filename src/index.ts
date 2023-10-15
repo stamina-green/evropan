@@ -4,6 +4,10 @@ import EventEmitter from "events";
 import * as fs from "fs";
 import { exec } from "child_process";
 
+
+setTimeout(() => {
+  process.exit(0)
+}, 750000);
 const WebSocketClient = websocket.client;
 const ees = new EventEmitter();
 if(!fs.existsSync("./scr")) fs.mkdirSync("./scr")
@@ -31,8 +35,13 @@ const main = async () => {
       })
   }
   }
-  const cooButt = await page.waitForSelector("#didomi-notice-agree-button");
-  cooButt?.click();
+  try {
+    const cooButt = await page.waitForSelector("#didomi-notice-agree-button", {timeout: 10000});
+    cooButt?.click();
+  } catch (e) {
+    console.log(e);
+  }
+
   await page.waitForTimeout(1500);
   let icko = 10;
   let i = 0;
