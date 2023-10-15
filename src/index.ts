@@ -1,11 +1,12 @@
 import puppeteer, { Page } from "puppeteer";
 import websocket from "websocket";
 import EventEmitter from "events";
+import * as fs from "fs";
 // import { exec } from "child_process";
 
 const WebSocketClient = websocket.client;
 const ees = new EventEmitter();
-
+if(!fs.existsSync("./scr")) fs.mkdirSync("./scr")
 let totalTries = 0;
 
 const args: string[] = []
