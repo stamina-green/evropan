@@ -17,7 +17,7 @@ const main = async () => {
   totalTries++;
   const browser = await puppeteer.launch({ headless: false, defaultViewport: {height: 1080, width: 920}, args });
   const page = await browser.newPage();
-  page.on("error", async (e) => {
+  page.on("error", async () => {
     if(Date.now() - start < 3000) {
       process.exit(1)
   };
