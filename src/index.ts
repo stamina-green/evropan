@@ -25,6 +25,7 @@ const main = async () => {
     console.log("i", i);
     if(i === 1) {
       await page.evaluate(() => {
+        // @ts-ignore
         window.scrollBy(0, 100)
       });
     }
