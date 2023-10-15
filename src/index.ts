@@ -10,11 +10,11 @@ if(!fs.existsSync("./scr")) fs.mkdirSync("./scr")
 let totalTries = 0;
 
 const args: string[] = []
-if(process.platform === "linux") args.push("--no-sandbox")
+if(process.platform === "linux") args.push("--no-sandbox", "--window-size=920,1080")
 
 const main = async () => {
   totalTries++;
-  const browser = await puppeteer.launch({ headless: false, defaultViewport: {height: 1280, width: 720}, args });
+  const browser = await puppeteer.launch({ headless: false, defaultViewport: {height: 1080, width: 920}, args });
   const page = await browser.newPage();
   await page.goto("https://www.evropa2.cz/souteze/maturitak-evropy-2-3");
   const cooButt = await page.waitForSelector("#didomi-notice-agree-button");
