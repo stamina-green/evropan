@@ -122,9 +122,21 @@ const getTextFromMP3Link = async (link: string): Promise<string> => {
 };
 
 const runCaptcha = async (page: Page): Promise<string> => {
-  const a = await page.waitForSelector(
-    'div[title="8.M – Gymnázium Christiana Dopplera"]'
-  );
+  let a;
+  for (let i = 0; i < 3; i++) {
+    try {
+    a = await page.waitForSelector(
+      'div[title="8.M – Gymnázium Christiana Dopplera"]', {timeout: 700}
+    );
+    break;
+    } catch (e) {
+    if (!a) {
+      await page.$$eval("button.jsx-3638543454.btn.primary", (el: any) => el[el.length - 1].click());
+      await page.waitForTimeout(1000);
+    }
+    } 
+  }
+  
   if (!a) throw new Error("a not found");
   const button = await (
     await (await a.getProperty("parentNode")).getProperty("parentNode")
