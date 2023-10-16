@@ -36,7 +36,7 @@ const main = async () => {
   }
   }
   try {
-    const cooButt = await page.waitForSelector("#didomi-notice-agree-button", {timeout: 10000});
+    const cooButt = await page.waitForSelector("#didomi-notice-agree-button", {timeout: 15000});
     cooButt?.click();
   } catch (e) {
     console.log(e);
@@ -101,7 +101,8 @@ const connectVPN = async (): Promise<void> => {
         console.log("reboot inc b");
         return resolve()
       }
-      return await connectVPN()
+      await connectVPN()
+      resolve()
     })
   } else resolve()
 })
