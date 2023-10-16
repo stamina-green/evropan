@@ -84,7 +84,7 @@ const servers = [
 ]
 
 const getRandomServer = (): string => {
-  return servers[Math.floor(Math.random() * servers.length)] || "Dedicated_IP"
+  return "us" + servers[Math.floor(Math.random() * servers.length)]
 }
 
 setTimeout(() => {
