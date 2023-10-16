@@ -1,4 +1,4 @@
-git pull;
+git stash; git pull; chmod a+x run.sh; 
 npm i;
 if [ $1 == "vpn" ]; then
   nordvpn connect Dedicated_IP;

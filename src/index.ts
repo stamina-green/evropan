@@ -3,7 +3,89 @@ import websocket from "websocket";
 import EventEmitter from "events";
 import * as fs from "fs";
 import { exec } from "child_process";
+const servers = [
+  "2920",
+  "2921",
+  "2924",
+  "2925",
+  "2929",
+  "2930",
+  "2939",
+  "2940",
+  "2943",
+  "2944",
+  "2945",
+  "2946",
+  "2949",
+  "2950",
+  "4950",
+  "4951",
+  "4953",
+  "4954",
+  "4957",
+  "4958",
+  "4959",
+  "4960",
+  "4961",
+  "4962",
+  "4963",
+  "4964",
+  "4965",
+  "4966",
+  "4967",
+  "4968",
+  "4969",
+  "4970",
+  "4971",
+  "4972",
+  "4973",
+  "4974",
+  "4975",
+  "4976",
+  "4977",
+  "4978",
+  "4979",
+  "4980",
+  "4981",
+  "4982",
+  "4983",
+  "4984",
+  "4985",
+  "4986",
+  "4987",
+  "4988",
+  "4989",
+  "4990",
+  "4991",
+  "4992",
+  "4993",
+  "4994",
+  "4995",
+  "4996",
+  "4997",
+  "4998",
+  "4999",
+  "10100",
+  "10101",
+  "10102",
+  "10103",
+  "10104",
+  "10105",
+  "10106",
+  "10107",
+  "10108",
+  "10109",
+  "10110",
+  "10111",
+  "10112",
+  "10113",
+  "10114",
+  "10115",
+]
 
+const getRandomServer = (): string => {
+  return servers[Math.floor(Math.random() * servers.length)] || "Dedicated_IP"
+}
 
 setTimeout(() => {
   process.exit(0)
@@ -30,7 +112,7 @@ const main = async () => {
     await page.goto("https://www.evropa2.cz/souteze/maturitak-evropy-2-3");
   } catch (error) {
     if(process.platform === "linux") {
-      await exec('nordvpn disconnect && nordvpn connect Dedicated_IP', async (e, out, err) => {
+      await exec('nordvpn disconnect && nordvpn connect ' + getRandomServer(), async (e, out, err) => {
         console.log(e, out, err);
       })
   }
@@ -93,7 +175,7 @@ const main = async () => {
 const connectVPN = async (): Promise<void> => {
   return new Promise(async (resolve) => {
   if(process.platform === "linux") {
-    await exec('nordvpn connect Dedicated_IP', async (e, out, err) => {
+    await exec('nordvpn connect ' + getRandomServer(), async (e, out, err) => {
       console.log(e, out, err);
       if(!err && !e) {
         await new Promise((r) => setTimeout(r, 10000))
