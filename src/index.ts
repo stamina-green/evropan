@@ -308,9 +308,9 @@ client.on("connect", function (connection) {
     connection.send(data);
   });
   ees.on("num", async () => {
-    console.log("sun");
+    console.log("num");
 
-    connection.send("sun");
+    connection.send("num");
   });
   connection.on("message", async function (message) {
     if (message.type === "utf8") {
