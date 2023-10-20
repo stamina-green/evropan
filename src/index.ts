@@ -209,7 +209,7 @@ const runCaptcha = async (page: Page): Promise<string> => {
   for (let i = 0; i < 3; i++) {
     try {
     a = await page.waitForSelector(
-      'div[title="8.M – Gymnázium Christiana Dopplera"]', {timeout: 700}
+      'div[title="4. B – Smíchovská střední průmyslová škola a gymnázium"]', {timeout: 700}
     );
     break;
     } catch (e) {

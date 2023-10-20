@@ -4,7 +4,7 @@ import * as https from "https";
 import { client as WebSocketClient } from "websocket";
 import { Leopard } from "@picovoice/leopard-node";
 const handle = new Leopard(
-  "3DxPvZIVoV8M80AZGpqulgFgU2elSkud635/lCZW5JQ7DMZNORlXcw=="
+  "317VQEYx5kWv1wJH8bzG24xHp1JdTtuhAefuuU9Ik2KH4iFkaVmCnw=="
 );
 
 const main = async () => {
